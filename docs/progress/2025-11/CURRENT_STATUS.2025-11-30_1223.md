@@ -1,72 +1,11 @@
 # CURRENT STATUS: Conversation Search v2
 
-**Status:** ACTIVE
+**Status:** SUPERSEDED
 **Created:** 2025-11-22
-**Last Updated:** 2025-11-30
-**Last Verified:** 2025-11-30
-**Previous Archive:** [CURRENT_STATUS.2025-11-30_1223.md](./docs/progress/2025-11/CURRENT_STATUS.2025-11-30_1223.md)
+**Last Updated:** 2025-11-24
+**Last Verified:** 2025-11-24
+**Previous Archive:** [CURRENT_STATUS.2025-11-24_1756.md](./docs/progress/2025-11/CURRENT_STATUS.2025-11-24_1756.md)
 **Project:** Conversation Search v2 MCP Server
-
----
-
-## Session Work (2025-11-30 PM)
-
-### Database Migration Bug Fixed
-**Problem:** Migration 002 (projects table) failed when database was empty because it tried to extract `MIN(started_at)` from zero rows, causing NULL constraint violation.
-
-**Fix Applied:**
-- Added `HAVING COUNT(*) > 0` clause to Step 1 of migration
-- Added `COALESCE(MIN(started_at), datetime('now'))` as fallback
-- **File:** `src/database/migrations/002_add_projects.sql:47-58`
-
-**Result:**
-- ✅ All 3 migrations now apply successfully on empty database
-- ✅ Database can be rebuilt from scratch cleanly
-
-### Database Rebuilt and Populated
-Successfully rebuilt v2 database from current JSONL files:
-
-**Import Results:**
-- **Sessions:** 684 (682 imported + 2 from current session)
-- **Messages:** 86,901
-- **Projects:** 44 discovered and indexed
-- **Database Size:** 772 MB
-- **Duration:** ~2 minutes
-- **Source:** All available JSONL conversation files
-
-**Note:** Numbers differ from previous import (215K messages) because:
-- Previous import included September 2025 data migrated from v1 database
-- Current import only processes existing JSONL files (which start from later date)
-- September JSONL files were lost/deleted at some point
-
-### Automated Import Issues Investigated
-**Previous Failures (Nov 29-30):**
-1. ✅ **Fixed Nov 29** - Cron PATH issue (node not found)
-   - Updated script to use absolute npm path: `/home/cordlesssteve/.nvm/versions/node/v20.19.3/bin/npm`
-   - **File:** `~/scripts/system/conversation-search-v2-import.sh:12`
-
-2. ✅ **Fixed This Session** - Migration 002 bug (described above)
-
-**Current Status:**
-- Automated imports will now work correctly
-- Cron schedule: Daily at 11:30 AM
-- Anacron catch-up: Runs on missed days
-
-### Projnav Configuration Updated
-Updated projnav to properly exclude v1 and track v2:
-
-**Changes:**
-- Added `conversation-search` to `exclude_projects` list
-- Added v2 metadata with `status: active-development`
-- Marked v1 as `status: deprecated` with note "DEPRECATED - use v2"
-- **File:** `~/.config/projnav/projnav.yaml`
-
-### Investigation Summary
-Investigated database update status and automation issues:
-- ✅ Cron script PATH - already fixed Nov 29
-- ✅ TypeScript build - no issues found
-- ✅ Migration bug - fixed this session
-- ✅ Database rebuilt successfully with 684 sessions
 
 ---
 
@@ -164,16 +103,25 @@ Set up automated daily imports for v2 database:
 
 ## Current Reality
 
-### Database Statistics (Current)
+### Database Statistics (Post-Recovery)
 | Metric | Value |
 |--------|-------|
-| Total Sessions | 684 |
-| Total Messages | 86,901 |
-| Total Projects | 44 |
-| Database Size | 772 MB |
-| Last Import | 2025-11-30 12:21 |
+| Total Sessions | 1,092 |
+| Total Messages | 215,024 |
+| Total Projects | 72 |
+| Earliest | July 23, 2025 |
+| Latest | November 23, 2025 |
+| Coverage | 123 days |
+| Database Size | 761 MB |
 
-**Note:** Database was rebuilt from scratch on 2025-11-30. Previous statistics (1,092 sessions, 215K messages) included September 2025 data migrated from v1 database. Current numbers reflect only JSONL files available on disk.
+### Monthly Breakdown
+| Month | Sessions | Messages |
+|-------|----------|----------|
+| July 2025 | 17 | 1,748 |
+| August 2025 | 341 | 39,820 |
+| September 2025 | 520 | 129,711 (recovered from v1) |
+| October 2025 | 45 | 15,344 |
+| November 2025 | 168 | 28,401 |
 
 ### ✅ Completed Components
 
@@ -245,8 +193,8 @@ Set up automated daily imports for v2 database:
 ## Architecture
 
 ### Current (v2)
-- **SQLite v2 Database**: `~/projects/.../conversation-search-v2/data/conversations.db` (772MB)
-- **Schema Version**: 3 (includes session stubs)
+- **SQLite v2 Database**: `~/data/conversation-search-v2/conversations.db` (761MB)
+- **Schema Version**: 2 (includes projects table)
 - **Entity Hierarchy**: Projects → Sessions → Messages
 - **Search**: FTS5 full-text search
 - **Automation**: Daily cron + anacron imports

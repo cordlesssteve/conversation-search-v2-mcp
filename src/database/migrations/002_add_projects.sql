@@ -44,16 +44,18 @@ CREATE INDEX IF NOT EXISTS idx_sessions_project_id ON sessions(project_id);
 -- ============================================
 
 -- Step 1: Create "General" project for home directory sessions
+-- Only insert if there are matching sessions (handle empty database)
 INSERT INTO projects (path, name, description, created_at, last_activity_at)
 SELECT
   '/home/cordlesssteve',
   'General',
   'General conversations not tied to a specific project',
-  MIN(started_at),
+  COALESCE(MIN(started_at), datetime('now')),
   MAX(started_at)
 FROM sessions
 WHERE project_path = '/home/cordlesssteve'
-   OR project_path IS NULL;
+   OR project_path IS NULL
+HAVING COUNT(*) > 0;
 
 -- Step 2: Create projects from distinct project_paths
 -- Extract name as last path segment using REPLACE trick (SQLite has no REVERSE)

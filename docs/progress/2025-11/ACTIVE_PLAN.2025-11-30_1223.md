@@ -1,11 +1,11 @@
 # ACTIVE PLAN: Conversation Search v2 Implementation
 
-**Status:** ACTIVE
+**Status:** SUPERSEDED
 **Created:** 2025-11-22
-**Last Updated:** 2025-11-30
-**Previous Archive:** [ACTIVE_PLAN.2025-11-30_1223.md](./docs/progress/2025-11/ACTIVE_PLAN.2025-11-30_1223.md)
+**Last Updated:** 2025-11-24
+**Previous Archive:** [ACTIVE_PLAN.2025-11-24_1756.md](./docs/progress/2025-11/ACTIVE_PLAN.2025-11-24_1756.md)
 **Project:** Conversation Search v2 MCP Server
-**Phase:** Phase 7 - Production Deployment
+**Phase:** Phase 7 - Production Deployment (Blocked - Awaiting Claude Code Restart)
 
 ---
 
@@ -29,10 +29,8 @@ Ground-up rebuild of conversation-search MCP server with sustainable architectur
 - [x] Create schema migration runner
 - [x] Implement migration 001: initial schema
 - [x] Implement migration 002: projects table
-- [x] Implement migration 003: session stubs
 - [x] Create database connection manager
 - [x] Verify schema creation on fresh DB
-- [x] Fix migration 002 empty database bug (2025-11-30)
 
 ### 1.3 Repository Layer ✅
 - [x] Create DatabaseConnection class (better-sqlite3 wrapper)
