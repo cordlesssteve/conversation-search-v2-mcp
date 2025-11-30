@@ -1,0 +1,48 @@
+{
+  "name": "@stacktown/conversation-search-v2",
+  "version": "2.1.0",
+  "description": "MCP server for searching and organizing Claude Code conversation history",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "conversation-search-v2": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc && cp src/database/migrations/*.sql dist/database/migrations/ && chmod +x dist/index.js",
+    "dev": "tsc --watch",
+    "start": "node dist/index.js",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js",
+    "migrate": "node dist/scripts/migrate.js",
+    "import": "node dist/scripts/import.js",
+    "index-vectors": "node dist/scripts/index-vectors.js",
+    "index-chunks": "node dist/scripts/index-chunks.js",
+    "migrate-v1-september": "node dist/scripts/migrate-v1-september.js",
+    "create-stub": "node dist/scripts/create-stub.js"
+  },
+  "keywords": [
+    "mcp",
+    "claude",
+    "conversation",
+    "search",
+    "sqlite",
+    "fts5"
+  ],
+  "author": "cordlesssteve",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "better-sqlite3": "^11.5.0",
+    "chromadb": "^1.9.2",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^22.9.0",
+    "typescript": "^5.6.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
