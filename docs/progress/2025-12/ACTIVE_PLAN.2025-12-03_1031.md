@@ -1,9 +1,9 @@
 # ACTIVE PLAN: Conversation Search v2 Implementation
 
-**Status:** ACTIVE
+**Status:** SUPERSEDED
 **Created:** 2025-11-22
-**Last Updated:** 2025-12-03
-**Previous Archive:** [ACTIVE_PLAN.2025-12-03_1031.md](./docs/progress/2025-12/ACTIVE_PLAN.2025-12-03_1031.md)
+**Last Updated:** 2025-11-30
+**Previous Archive:** [ACTIVE_PLAN.2025-11-30_1223.md](./docs/progress/2025-11/ACTIVE_PLAN.2025-11-30_1223.md)
 **Project:** Conversation Search v2 MCP Server
 **Phase:** Phase 7 - Production Deployment
 
@@ -67,13 +67,12 @@ Ground-up rebuild of conversation-search MCP server with sustainable architectur
 - [x] Recover September 2025 data from v1 (129,711 messages)
 - [x] Complete date coverage: July 23 - November 23, 2025
 
-### 2.4 Automated Scheduling ✅ (2025-11-23, fixed 2025-12-03)
+### 2.4 Automated Scheduling ✅ (2025-11-23)
 - [x] Create wrapper script for imports
 - [x] Set up cron (11:30 AM daily)
 - [x] Set up anacron (catch-up for missed runs)
 - [x] Test automated import
 - [x] Verify logging
-- [x] Fix cron PATH issue for node binary (2025-12-03)
 
 ---
 

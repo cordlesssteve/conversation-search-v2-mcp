@@ -1,36 +1,11 @@
 # CURRENT STATUS: Conversation Search v2
 
-**Status:** ACTIVE
+**Status:** SUPERSEDED
 **Created:** 2025-11-22
-**Last Updated:** 2025-12-03
-**Last Verified:** 2025-12-03
-**Previous Archive:** [CURRENT_STATUS.2025-12-03_1031.md](./docs/progress/2025-12/CURRENT_STATUS.2025-12-03_1031.md)
+**Last Updated:** 2025-11-30
+**Last Verified:** 2025-11-30
+**Previous Archive:** [CURRENT_STATUS.2025-11-30_1223.md](./docs/progress/2025-11/CURRENT_STATUS.2025-11-30_1223.md)
 **Project:** Conversation Search v2 MCP Server
-
----
-
-## Session Work (2025-12-03)
-
-### Automated Import Cron Bug Fixed
-**Problem:** Daily cron import had been failing since Nov 30 with error:
-```
-/usr/bin/env: 'node': No such file or directory
-ERROR: Import failed with status 127
-```
-
-**Root Cause:**
-- Script set full path to npm: `/home/cordlesssteve/.nvm/versions/node/v20.19.3/bin/npm`
-- But when npm spawned `node dist/scripts/import.js`, `node` wasn't in cron's PATH
-- nvm isn't sourced in cron environment, so `node` binary was invisible
-
-**Fix Applied:**
-- Added `export PATH="/home/cordlesssteve/.nvm/versions/node/v20.19.3/bin:$PATH"` to import script
-- **File:** `~/scripts/system/conversation-search-v2-import.sh:11-12`
-
-**Result:**
-- ✅ Import now runs successfully
-- ✅ Database updated: 750 → 751 sessions, 86,901 → 97,231 messages (+10,330)
-- ✅ Latest conversation indexed: 2025-12-03 16:29 UTC
 
 ---
 
@@ -192,13 +167,13 @@ Set up automated daily imports for v2 database:
 ### Database Statistics (Current)
 | Metric | Value |
 |--------|-------|
-| Total Sessions | 751 |
-| Total Messages | 97,231 |
-| Total Projects | 44+ |
-| Database Size | 797 MB |
-| Last Import | 2025-12-03 10:30 |
+| Total Sessions | 684 |
+| Total Messages | 86,901 |
+| Total Projects | 44 |
+| Database Size | 772 MB |
+| Last Import | 2025-11-30 12:21 |
 
-**Note:** Database was rebuilt from scratch on 2025-11-30, then updated via fixed cron import on 2025-12-03.
+**Note:** Database was rebuilt from scratch on 2025-11-30. Previous statistics (1,092 sessions, 215K messages) included September 2025 data migrated from v1 database. Current numbers reflect only JSONL files available on disk.
 
 ### ✅ Completed Components
 
