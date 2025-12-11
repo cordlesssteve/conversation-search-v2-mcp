@@ -19,6 +19,7 @@
     "index-vectors": "node dist/scripts/index-vectors.js",
     "index-chunks": "node dist/scripts/index-chunks.js",
     "migrate-v1-september": "node dist/scripts/migrate-v1-september.js",
+    "migrate:v1": "node dist/scripts/migrate-v1.js",
     "create-stub": "node dist/scripts/create-stub.js"
   },
   "keywords": [

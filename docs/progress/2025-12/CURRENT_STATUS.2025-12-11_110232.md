@@ -1,52 +1,12 @@
 # CURRENT STATUS: Conversation Search v2
 
-**Status:** ACTIVE
+**Status:** SUPERSEDED
+**Superseded By:** [CURRENT_STATUS.md](../../CURRENT_STATUS.md)
 **Created:** 2025-11-22
-**Last Updated:** 2025-12-11
-**Last Verified:** 2025-12-11
-**Previous Archive:** [CURRENT_STATUS.2025-12-11_110232.md](docs/progress/2025-12/CURRENT_STATUS.2025-12-11_110232.md)
+**Last Updated:** 2025-12-03
+**Last Verified:** 2025-12-03
+**Previous Archive:** [CURRENT_STATUS.2025-12-03_1031.md](./docs/progress/2025-12/CURRENT_STATUS.2025-12-03_1031.md)
 **Project:** Conversation Search v2 MCP Server
-
----
-
-## Session Work (2025-12-11)
-
-### V1 to V2 Data Migration Completed
-**Problem:** V2 database was missing ALL September and October 2025 conversation data. Investigation revealed:
-- V2 had only 113,243 messages (July, August, November, December)
-- September/October JSONL source files had been deleted from disk
-- V1 database (1.5GB) was the ONLY remaining copy of this historical data
-
-**Solution Created:**
-- Created `src/scripts/migrate-v1.ts` - Migrates historical data directly from V1 database
-- Added `npm run migrate:v1` script to package.json
-- Script handles: session creation, message copying, project resolution, FTS rebuilding
-
-**Migration Results:**
-- ✅ 934 sessions migrated
-- ✅ 228,880 messages migrated
-- ✅ 11 errors (likely duplicate UUIDs)
-- ✅ September 2025: 0 → 129,711 messages
-- ✅ October 2025: 0 → 44,075 messages
-
-**Final Database Statistics:**
-| Metric | Before | After |
-|--------|--------|-------|
-| Sessions | 923 | 1,867 |
-| Messages | 113,243 | 347,039 |
-| Database Size | ~882 MB | ~1.1 GB |
-
-### browse_sessions Project Filter Fixed
-**Problem:** `browse_sessions` returned 0 results when filtering by project (e.g., "connoisseur-staging")
-
-**Root Cause:** `SessionRepository.ts` used exact match (`=`) for project_path filter instead of partial match (`LIKE`)
-
-**Fix Applied:**
-- Changed lines 264-265 and 367-368 in `SessionRepository.ts`
-- Before: `conditions.push('s.project_path = ?')`
-- After: `conditions.push('s.project_path LIKE ?')` with `%${filter.project_path}%`
-
-**Result:** Filtering by partial project names now works correctly
 
 ---
 
@@ -233,13 +193,13 @@ Set up automated daily imports for v2 database:
 ### Database Statistics (Current)
 | Metric | Value |
 |--------|-------|
-| Total Sessions | 1,867 |
-| Total Messages | 347,039 |
+| Total Sessions | 751 |
+| Total Messages | 97,231 |
 | Total Projects | 44+ |
-| Database Size | ~1.1 GB |
-| Last Migration | 2025-12-11 |
+| Database Size | 797 MB |
+| Last Import | 2025-12-03 10:30 |
 
-**Note:** V1 historical data migrated on 2025-12-11, recovering September/October 2025 messages.
+**Note:** Database was rebuilt from scratch on 2025-11-30, then updated via fixed cron import on 2025-12-03.
 
 ### ✅ Completed Components
 

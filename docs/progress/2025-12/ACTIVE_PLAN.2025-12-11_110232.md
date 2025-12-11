@@ -1,9 +1,10 @@
 # ACTIVE PLAN: Conversation Search v2 Implementation
 
-**Status:** ACTIVE
+**Status:** SUPERSEDED
+**Superseded By:** [ACTIVE_PLAN.md](../../ACTIVE_PLAN.md)
 **Created:** 2025-11-22
-**Last Updated:** 2025-12-11
-**Previous Archive:** [ACTIVE_PLAN.2025-12-11_110232.md](docs/progress/2025-12/ACTIVE_PLAN.2025-12-11_110232.md)
+**Last Updated:** 2025-12-03
+**Previous Archive:** [ACTIVE_PLAN.2025-12-03_1031.md](./docs/progress/2025-12/ACTIVE_PLAN.2025-12-03_1031.md)
 **Project:** Conversation Search v2 MCP Server
 **Phase:** Phase 7 - Production Deployment
 
@@ -66,7 +67,6 @@ Ground-up rebuild of conversation-search MCP server with sustainable architectur
 - [x] Verify no duplicates
 - [x] Recover September 2025 data from v1 (129,711 messages)
 - [x] Complete date coverage: July 23 - November 23, 2025
-- [x] Full V1 to V2 migration (347,039 total messages) - 2025-12-11
 
 ### 2.4 Automated Scheduling ✅ (2025-11-23, fixed 2025-12-03)
 - [x] Create wrapper script for imports
@@ -86,7 +86,7 @@ Ground-up rebuild of conversation-search MCP server with sustainable architectur
 - [x] Implement SearchService with FTS5 queries
 - [x] Support phrase search
 - [x] Support filtering by date range
-- [x] Support filtering by project (fixed LIKE matching 2025-12-11)
+- [x] Support filtering by project
 - [x] Ranking/relevance scoring
 
 ### 3.2 MCP Tools (Basic Set) ✅

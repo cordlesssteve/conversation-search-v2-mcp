@@ -261,8 +261,8 @@ export class SessionRepository {
       conditions.push('s.project_id = ?');
       params.push(filter.project_id);
     } else if (filter?.project_path) {
-      conditions.push('s.project_path = ?');
-      params.push(filter.project_path);
+      conditions.push('s.project_path LIKE ?');
+      params.push(`%${filter.project_path}%`);
     }
 
     if (filter?.has_title === true) {
@@ -364,8 +364,8 @@ export class SessionRepository {
       conditions.push('s.project_id = ?');
       params.push(filter.project_id);
     } else if (filter?.project_path) {
-      conditions.push('s.project_path = ?');
-      params.push(filter.project_path);
+      conditions.push('s.project_path LIKE ?');
+      params.push(`%${filter.project_path}%`);
     }
 
     if (conditions.length > 0) {
